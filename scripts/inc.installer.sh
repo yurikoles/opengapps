@@ -2592,20 +2592,6 @@ if [ -n "$user_remove_folder_list" ]; then
   echo "              * User Requested Removal" >> $calc_log
 fi
 
-# Check whether there's enough free space to complete this installation
-if [ "$post_install_size_kb" -lt 0 ]; then
-  # We don't have enough system space to install everything user requested
-  ui_print "Insufficient storage space available in"
-  ui_print "System partition. You may want to use a"
-  ui_print "smaller Open GApps package or consider"
-  ui_print "removing some apps using gapps-config."
-  ui_print "See:'$log_folder/open_gapps_log.txt'"
-  ui_print "for complete details and information."
-  ui_print " "
-  install_note="${install_note}system_space_msg"$'\n' # make note that there is insufficient space in system to install
-  abort "$E_NOSPACE"
-fi
-
 # Check to see if this is the 'real thing' or only a test
 if ( grep -qiE '^test$' "$g_conf" ); then # user has selected a 'test' install ONLY
   ui_print "- Exiting Simulated Install"
